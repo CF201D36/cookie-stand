@@ -4,7 +4,11 @@
 // Safety Goggles ON!
 'use strict';
 
-// Get Key Information
+// Global Vartiables
+var myHours = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
+var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+
+// Get Element Information
 var navHome = document.getElementById('home');
 var navSales = document.getElementById('sales');
 
@@ -14,11 +18,37 @@ var myStore1 = {
   myCustomerMin: 23,
   myCustomerMax: 65,
   myAvgSale: 6.3,
-  myAvgCustomers: null,
+  myAvgCustPerHour: null,
   myStoreTraffic: function (store, custMin, custMax) {
     var randNum = Math.random() * (custMax - store.custMin) + custMin;
     return parseInt(randNum);
   }
+  myAvgCustSalesPerHour: function () {
+    this.myAvgCustPerHour * this.myAvgSale;
+  }
+  // modify to fit your variable names
+  generateList: function() {
+    var ulEl = document.getElementById('storeFirstAndPike');
+
+    for(i = 0; i < hours.length; i++) {
+      // 1. create li elements
+      var liEl = document.createElement('li');
+      
+      // 2. give them content
+      var liRandomNum = this.averagePerHour();
+
+      liEl.textContent = hours[i] + ': ' + liRandomNum + ' cookies.';
+      runningTotal += liRandomNum;
+
+      // 3. append to the DOM
+      // parentElement.appendChild(childElement);
+      ulEl.appendChild(liEl);
+    }
+  }
+  
+  var totalEl = document.createElement('li');
+  totalEl.textContent = 'Total: ' + runningTotal;
+  ulEl.appendChild(totalEl);
 };
 
 var myStore2 = {
@@ -55,8 +85,6 @@ var myStore5 = {
 };
 
 // Extra Variables
-var myHours = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
-var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 var myStores = [myStore1, myStore2, myStore3, myStore4, myStore5];
 
 // ------------------------------------------------------------------------------------------------------------

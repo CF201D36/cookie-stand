@@ -82,7 +82,7 @@ a:visited {color: white;}
     box-sizing: content-box;
     top: 30%;
     left: 50%;
-    transform: translate(-50%,-225%);
+    transform: translate(-50%,-165%);
 }
 
 .heading-hero {
@@ -124,7 +124,14 @@ ul.nav {
     padding: 10px;
 }
 
-
+/* Tables */
+table.analytics {
+    margin: 50px;
+    border: 1px solid #ddd;
+}
+tr.analytics {
+    margin: 50px;
+}
 
 /* Animations */
 @keyframes fadeIn {
