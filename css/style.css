@@ -1,0 +1,144 @@
+/* Default Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Lato', 'Verdana', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+}
+main {
+    margin-top: 18px;
+    margin-bottom: 50px;
+}
+p {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 25px;    
+}
+b {font-weight: 700;}
+i {font-style: italic;}
+i {font-style: underline;}
+
+/* Links */
+a:link    {color: white; text-decoration: none;}
+a:hover   {color: rgb(255, 255, 255); text-decoration: none; text-shadow: 1px 1px rgb(231, 81, 156); }
+a:active  {color: rgb(231, 81, 156);}
+a:visited {color: white;}
+
+/* Header Styles */
+.home {
+    height: 60vh;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(126,213,111,0.8),
+        rgba(40,180,131,0.8)),
+        url(../img/salmon.png);
+    /* background-attachment: fixed; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain 50%;
+    clip-path: polygon(0 0, 100% 0, 100% 60vh, 0 100%);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.sales {
+    height: 28vh;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(111, 193, 213, 0.8),
+        rgba(40, 147, 180, 0.8)),
+        url(../img/salmon.png);
+    /* background-attachment: fixed; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain 50%;
+    clip-path: polygon(0 0, 100% 0, 100% 60vh, 0 100%);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.textbox-home {
+    position: absolute;
+    box-sizing: content-box;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.textbox-sales {
+    position: absolute;
+    box-sizing: content-box;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-225%);
+}
+
+.heading-hero {
+    color: white;
+    text-transform: uppercase;
+}
+
+.heading-hero-main {
+    display: block;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+    animation-name: fadeIn;
+    animation-duration: 3s;
+}
+
+.heading-hero-sub {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+    animation-name: fadeLeft;
+    animation-duration: 5s;    
+}
+
+/* Nav Bar */
+ul.nav {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+.nav > li{
+    display: inline;
+    padding: 10px;
+}
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
