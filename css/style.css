@@ -1,0 +1,116 @@
+/* Default Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+}
+p {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 25px;    
+}
+b {font-weight: 700;}
+i {font-style: italic;}
+i {font-style: underline;}
+
+/* Links */
+a:link    {color: white; text-decoration: none;}
+a:hover   {color: rgb(25, 131, 94); text-decoration: underline;}
+a:active  {color: blue;}
+a:visited {color: white;}
+
+/* Header Styles */
+.header {
+    height: 60vh;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(126,213,111,0.8),
+        rgba(40,180,131,0.8)),
+        url(../img/salmon.png);
+    /* background-attachment: fixed; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain 50%;
+    clip-path: polygon(0 0, 100% 0, 100% 60vh, 0 100%);
+}
+
+.logo {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.text-box {
+    position: absolute;
+    box-sizing: content-box;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.heading-hero {
+    color: white;
+    text-transform: uppercase;
+}
+
+.heading-hero-main {
+    display: block;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+    animation-name: fadeIn;
+    animation-duration: 3s;
+}
+
+.heading-hero-sub {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+    animation-name: fadeLeft;
+    animation-duration: 5s;    
+}
+
+/* Nav Bar */
+ul.nav {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+.nav > li{
+    display: inline;
+    padding: 10px;
+}
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
