@@ -46,22 +46,30 @@ var myStore5 = {
   myAvgCustomers: null,
 };
 
-// Calculate and store the simulated amount of cookies purchased each hour at THIS location (myAvgSale * myAvgCustomers)
-myStore1.myAvgCustomers = myStoreTraffic(myStore1.myCustomerMin, myStore1.myCustomerMax);
-myStore2.myAvgCustomers = myStoreTraffic(myStore2.myCustomerMin, myStore2.myCustomerMax);
-myStore3.myAvgCustomers = myStoreTraffic(myStore3.myCustomerMin, myStore3.myCustomerMax);
-myStore4.myAvgCustomers = myStoreTraffic(myStore4.myCustomerMin, myStore4.myCustomerMax);
-myStore5.myAvgCustomers = myStoreTraffic(myStore5.myCustomerMin, myStore5.myCustomerMax);
+var myStores = [myStore1, myStore2, myStore3, myStore4, myStore5];
 
-// Clean the data
-myStore1.myAvgCustomers = myStore1.myAvgCustomers.toFixed(2);
-myStore2.myAvgCustomers = myStore2.myAvgCustomers.toFixed(2);
-myStore3.myAvgCustomers = myStore3.myAvgCustomers.toFixed(2);
-myStore4.myAvgCustomers = myStore4.myAvgCustomers.toFixed(2);
-myStore5.myAvgCustomers = myStore5.myAvgCustomers.toFixed(2);
+// Calculate and store the AVERAGE number of customers per hour per location
+for (var i = 0; i < myStores.length; i++) {
+  var myArray = myStores[i];
 
+}
+myStore1.myAvgCustomers = parseInt(myStoreTraffic(myStore1.myCustomerMin, myStore1.myCustomerMax));
+myStore2.myAvgCustomers = parseInt(myStoreTraffic(myStore2.myCustomerMin, myStore2.myCustomerMax));
+myStore3.myAvgCustomers = parseInt(myStoreTraffic(myStore3.myCustomerMin, myStore3.myCustomerMax));
+myStore4.myAvgCustomers = parseInt(myStoreTraffic(myStore4.myCustomerMin, myStore4.myCustomerMax));
+myStore5.myAvgCustomers = parseInt(myStoreTraffic(myStore5.myCustomerMin, myStore5.myCustomerMax));
+
+// Calculate and store the simulated amount of cookies purchased each location per hour (myAvgSale * myAvgCustomers)
+
+// Calcluate Average 
 
 // Generate a random number of customers per hour (using RANGE between myCustomerMin and myCustomerMax)
-function myStoreTraffic(custMin, custMax) {
-  return Math.random() * (custMax - custMin) + custMin;
+function myStoreTraffic(store, custMin, custMax) {
+  var randNum = Math.random() * (custMax - store.custMin) + custMin;
+  return parseInt(randNum);
+}
+
+// Calculate and store the simulated amount of cookies purchased each location per hour (myAvgSale * myAvgCustomers)
+function mySimulation(avgSale, avgCust) {
+  return avgSale * avgCust;
 }
