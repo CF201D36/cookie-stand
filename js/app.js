@@ -4,85 +4,221 @@
 // Safety Goggles ON!
 'use strict';
 
-// Get Key Information
-var navHome = document.getElementById('home');
-var navSales = document.getElementById('sales');
+// Global Vartiables
+// var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+var myHours = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
 
-// Starting Data
+// Store Data
 var myStore1 = {
-  myLocation: '1st and Pike',
-  myCustomerMin: 23,
-  myCustomerMax: 65,
-  myAvgSale: 6.3,
-  myAvgCustomers: null,
-  myStoreTraffic: function (store, custMin, custMax) {
-    var randNum = Math.random() * (custMax - store.custMin) + custMin;
-    return parseInt(randNum);
+  location: '1st and Pike',
+  custMin: 23,
+  custMax: 65,
+  avgSalePerCust: 6.3,
+  salesPerHour: [],
+  dailyTotal: 0,
+
+  custActivity: function (cMin, cMax) {
+    // Cycle through each hour
+    for(var i=0; i < myHours.length; i++) {
+      // Generate a random customer traffic total for each hour
+      var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
+
+      // Generate sales data based on customer traffic
+      var dailySales = Math.round(this.avgSalePerCust * randNum);
+      this.dailyTotal += dailySales;
+
+      // Add hourly sales data to 'salesPerHour' array
+      this.salesPerHour.push(myHours[i] + ': ' + dailySales + ' cookies');
+    }
+  },
+  generateList: function() {
+    // Output destination
+    var ulEl = document.getElementById('listFirstAndPike');
+
+    // Append Hourly Sales
+    for(var i=0; i < this.salesPerHour.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = this.salesPerHour[i];
+      ulEl.appendChild(liEl);
+    }
+    // Output Totals
+    var totalEl = document.createElement('li');
+    totalEl.textContent = 'Total: ' + this.dailyTotal;
+    ulEl.appendChild(totalEl);
   }
 };
 
 var myStore2 = {
-  myLocation: 'SeaTac Airport',
-  myCustomerMin: 3,
-  myCustomerMax: 24,
-  myAvgSale: 1.2,
-  myAvgCustomers: null,
+  location: 'SeaTac Airport',
+  custMin: 3,
+  custMax: 24,
+  avgSalePerCust: 1.2,
+  salesPerHour: [],
+  dailyTotal: 0,
+
+  custActivity: function (cMin, cMax) {
+    // Cycle through each hour
+    for(var i=0; i < myHours.length; i++) {
+      // Generate a random customer traffic total for each hour
+      var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
+
+      // Generate sales data based on customer traffic
+      var dailySales = Math.round(this.avgSalePerCust * randNum);
+      this.dailyTotal += dailySales;
+
+      // Add hourly sales data to 'salesPerHour' array
+      this.salesPerHour.push(myHours[i] + ': ' + dailySales + ' cookies');
+    }
+  },
+  generateList: function() {
+    // Output destination
+    var ulEl = document.getElementById('listSeatacAirport');
+
+    // Append Hourly Sales
+    for (var i=0; i < this.salesPerHour.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = this.salesPerHour[i];
+      ulEl.appendChild(liEl);
+    }
+    //Output Totals
+    var totalEl = document.createElement('li');
+    totalEl.textContent = 'Total: ' + this.dailyTotal;
+    ulEl.appendChild(totalEl);
+  }
 };
 
 var myStore3 = {
-  myLocation: 'Seattle Center',
-  myCustomerMin: 11,
-  myCustomerMax: 38,
-  myAvgSale: 3.7,
-  myAvgCustomers: null,
+  location: 'Seattle Center',
+  custMin: 11,
+  custMax: 38,
+  avgSalePerCust: 3.7,
+  salesPerHour: [],
+  dailyTotal: 0,
+
+  custActivity: function (cMin, cMax) {
+    // Cycle through each hour
+    for(var i=0; i < myHours.length; i++) {
+      // Generate a random customer traffic total for each hour
+      var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
+
+      // Generate sales data based on customer traffic
+      var dailySales = Math.round(this.avgSalePerCust * randNum);
+      this.dailyTotal += dailySales;
+
+      // Add hourly sales data to 'salesPerHour' array
+      this.salesPerHour.push(myHours[i] + ': ' + dailySales + ' cookies');
+    }
+  },
+  generateList: function() {
+    // Output destination
+    var ulEl = document.getElementById('listSeattleCenter');
+
+    // Append Hourly Sales
+    for (var i=0; i < this.salesPerHour.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = this.salesPerHour[i];
+      ulEl.appendChild(liEl);
+    }
+    //Output Totals
+    var totalEl = document.createElement('li');
+    totalEl.textContent = 'Total: ' + this.dailyTotal;
+    ulEl.appendChild(totalEl);
+  }
 };
 
 var myStore4 = {
-  myLocation: 'Capitol Hill',
-  myCustomerMin: 20,
-  myCustomerMax: 38,
-  myAvgSale: 2.3,
-  myAvgCustomers: null,
-  
+  location: 'Capitol Hill',
+  custMin: 20,
+  custMax: 38,
+  avgSalePerCust: 2.3,
+  salesPerHour: [],
+  dailyTotal: 0,
+
+  custActivity: function (cMin, cMax) {
+    // Cycle through each hour
+    for(var i=0; i < myHours.length; i++) {
+      // Generate a random customer traffic total for each hour
+      var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
+
+      // Generate sales data based on customer traffic
+      var dailySales = Math.round(this.avgSalePerCust * randNum);
+      this.dailyTotal += dailySales;
+
+      // Add hourly sales data to 'salesPerHour' array
+      this.salesPerHour.push(myHours[i] + ': ' + dailySales + ' cookies');
+    }
+  },
+  generateList: function() {
+    // Output destination
+    var ulEl = document.getElementById('listCapitolHill');
+
+    // Append Hourly Sales
+    for (var i=0; i < this.salesPerHour.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = this.salesPerHour[i];
+      ulEl.appendChild(liEl);
+    }
+    //Output Totals
+    var totalEl = document.createElement('li');
+    totalEl.textContent = 'Total: ' + this.dailyTotal;
+    ulEl.appendChild(totalEl);
+  }
 };
 
 var myStore5 = {
-  myLocation: 'Alki',
-  myCustomerMin: 2,
-  myCustomerMax: 16,
-  myAvgSale: 4.6,
-  myAvgCustomers: null,
+  location: 'Alki',
+  custMin: 2,
+  custMax: 16,
+  avgSalePerCust: 4.6,
+  salesPerHour: [],
+  dailyTotal: 0,
+
+  custActivity: function (cMin, cMax) {
+    // Cycle through each hour
+    for(var i=0; i < myHours.length; i++) {
+      // Generate a random customer traffic total for each hour
+      var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
+
+      // Generate sales data based on customer traffic
+      var dailySales = Math.round(this.avgSalePerCust * randNum);
+      this.dailyTotal += dailySales;
+
+      // Add hourly sales data to 'salesPerHour' array
+      this.salesPerHour.push(myHours[i] + ': ' + dailySales + ' cookies');
+    }
+  },
+  generateList: function() {
+    // Output destination
+    var ulEl = document.getElementById('listAlki');
+
+    // Append Hourly Sales
+    for (var i=0; i < this.salesPerHour.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = this.salesPerHour[i];
+      ulEl.appendChild(liEl);
+    }
+    //Output Totals
+    var totalEl = document.createElement('li');
+    totalEl.textContent = 'Total: ' + this.dailyTotal;
+    ulEl.appendChild(totalEl);
+  }
 };
-
-// Extra Variables
-var myHours = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
-var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
-var myStores = [myStore1, myStore2, myStore3, myStore4, myStore5];
-
 // ------------------------------------------------------------------------------------------------------------
 // Operations
 // ------------------------------------------------------------------------------------------------------------
-// Estimate the AVERAGE number of CUSTOMERS per HOUR per LOCATION
-myStores.forEach(function(myStore){
-  console.log(myStore);
-  myStore.myAvgCustomers = calcTraffic(myStore.myCustomerMin, myStore.myCustomerMax);
-});
+// Create an array of stores
+var myStores = [myStore1,myStore2,myStore3,myStore4,myStore5];
 
-// Calculate and store the simulated amount of cookies purchased each location per hour (myAvgSale * myAvgCustomers)
+// Generate sales data foreach location
+for(var i=0; i<myStores.length; i++) {
+  myStores[i].custActivity(myStores[i].custMin, myStores[i].custMax);
+}
 
-// Calcluate Average 
-
-
+// Output sales data to 'sales.html' foreach location
+for(var k=0; k<myStores.length; k++) {
+  myStores[k].generateList();
+}
 // ------------------------------------------------------------------------------------------------------------
 // FUNCTIONS
 // ------------------------------------------------------------------------------------------------------------
-// Generate a random number of customers per hour (uses RANGE between myCustomerMin and myCustomerMax)
-function calcTraffic(custMin, custMax) {
-  var randNum = Math.random() * (custMax - custMin) + custMin;
-  return parseInt(randNum);
-}
-
-// Calculate and store the simulated amount of cookies purchased each location per hour (myAvgSale * myAvgCustomers)
-function mySimulation(avgSale, avgCust) {
-  return avgSale * avgCust;
-}
+// Coming soon!
