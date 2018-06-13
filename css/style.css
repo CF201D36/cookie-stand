@@ -78,11 +78,11 @@ a:visited {color: white;}
 }
 
 .textbox-sales {
-    position: absolute;
+    position: relative;
     box-sizing: content-box;
-    top: 30%;
+    top: 65%;
     left: 50%;
-    transform: translate(-50%,-165%);
+    transform: translate(-50%,-100%);
 }
 
 .heading-hero {
@@ -123,6 +123,60 @@ ul.nav {
     display: inline;
     padding: 10px;
 }
+
+/* Lists */
+.saleslist {
+    position: relative;
+    box-sizing: content-box;
+    /* left: 20%; */
+    /* transform: translate(0%,0%); */
+}
+
+h1.list {
+    font-family: 'Lato';
+    font-size: 18px;
+    font-weight: 400;
+}
+div.column1 {
+    font-family: 'Rokkitt',sans-serif;
+    position: absolute;
+    margin-left: 50px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+div.column2 {
+    font-family: 'Rokkitt',sans-serif;
+    position: absolute;
+    margin-left: 250px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+div.column3 {
+    font-family: 'Rokkitt',sans-serif;
+    position: absolute;
+    margin-left: 450px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+div.column4 {
+    font-family: 'Rokkitt',sans-serif;
+    position: absolute;
+    margin-left: 650px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+div.column5 {
+    font-family: 'Rokkitt',sans-serif;
+    position: absolute;
+    margin-left: 850px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+div.column1 ul li:last-child {font-weight: 700;}
+div.column2 ul li:last-child {font-weight: 700;}
+div.column3 ul li:last-child {font-weight: 700;}
+div.column4 ul li:last-child {font-weight: 700;}
+div.column5 ul li:last-child {font-weight: 700;}
 
 /* Tables */
 table.analytics {
