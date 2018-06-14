@@ -34,7 +34,7 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
 // Generate customer activity data using a random number generator
 Store.prototype.custActivity = function (cMin, cMax) {
   // Cycle through each hour
-  for(let i=0; i < myHours.length; i++) {
+  for(var i=0; i < myHours.length; i++) {
     // Generate a random customer traffic total for each hour
     var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
 
@@ -48,16 +48,16 @@ Store.prototype.custActivity = function (cMin, cMax) {
 };
 
 // Render Table Header Row
-Store.prototype.renderHeader = function () {``
+Store.renderHeader = function () {
   var hrEl = document.createElement('tr');
-  var thEl = document.createElement('th');
 
   //Add blank cell to first TD element in Header
-  hrEl.appendChild(thEl);
+  // hrEl.appendChild(thEl);
 
   // Add hours to Header
-  for(let i=0; i < myHours.length; i++) {
-    thEl.textContent = i;
+  for(var i=0; i < myHours.length; i++) {
+    var thEl = document.createElement('th');
+    thEl.textContent = myHours[i];
     hrEl.appendChild(thEl);
   }
 
@@ -96,16 +96,23 @@ new Store('Capitol Hill',   20, 38, 2.3, [], 0); // eslint-disable-line
 new Store('Alki',           2,  16, 4.6, [], 0); // eslint-disable-line
 
 // Generate Customer Activity Data foreach location
-for(let i=0; i<myStores.length; i++) {
-  myStores[i].custActivity(myStores[i].custMin, myStores[i].custMax);
-}
+Store.prototype.generateRandom = function () {
+  for(var i=0; i<myStores.length; i++) {
+    myStores[i].custActivity(myStores[i].custMin, myStores[i].custMax);
+  }
+};
 
 // Output sales data to 'sales.html' foreach location
-for(let i=0; i<myStores.length; i++) {
-  console.log('Rendering table for: ' + myStores[i].location);
-  myStores[i].renderHeader();
-  myStores[i].renderRow();
-}
+Store.loadTable = function () {
+  Store.renderHeader();
+
+  for(var i=0; i<myStores.length; i++) {
+    console.log('Rendering table for: ' + myStores[i].location);
+    myStores[i].renderRow();
+  }
+};
+
+Store.loadTable();
 
 // ------------------------------------------------------------------------------------------------------------
 // FUNCTIONS
