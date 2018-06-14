@@ -8,8 +8,7 @@
 // var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 var myHours  = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
 var myStores = [];
-var myTable  = document.getElementById('table');
-var i = 0;
+var myTable  = document.getElementById('mySales');
 
 // ------------------------------------------------------------------------------------------------------------
 // CONSTRUCTOR OBJECTS
@@ -20,8 +19,10 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
   this.custMin = myMin;
   this.custMax = myMax;
   this.avgSalePerCust = myAvg;
-  this.salesPerHour = salesPH;
-  this.dailyTotal = dailyT;
+
+  // Generated Values
+  this.salesPerHour = salesPH; // cookies per hour
+  this.dailyTotal = dailyT;    // total cookies sold per day
 
   // Store a reference to every new instance in global 'myStores' array
   myStores.push(this);
@@ -33,7 +34,7 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
 // Generate customer activity data using a random number generator
 Store.prototype.custActivity = function (cMin, cMax) {
   // Cycle through each hour
-  for(var i=0; i < myHours.length; i++) {
+  for(let i=0; i < myHours.length; i++) {
     // Generate a random customer traffic total for each hour
     var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
 
@@ -47,7 +48,7 @@ Store.prototype.custActivity = function (cMin, cMax) {
 };
 
 // Render Table Header Row
-Store.prototype.renderHeader = function () {
+Store.prototype.renderHeader = function () {``
   var hrEl = document.createElement('tr');
   var thEl = document.createElement('th');
 
@@ -55,7 +56,7 @@ Store.prototype.renderHeader = function () {
   hrEl.appendChild(thEl);
 
   // Add hours to Header
-  for(var i=0; i < myHours.length; i++) {
+  for(let i=0; i < myHours.length; i++) {
     thEl.textContent = i;
     hrEl.appendChild(thEl);
   }
@@ -94,19 +95,13 @@ new Store('Seattle Center', 11, 38, 3.7, [], 0); // eslint-disable-line
 new Store('Capitol Hill',   20, 38, 2.3, [], 0); // eslint-disable-line
 new Store('Alki',           2,  16, 4.6, [], 0); // eslint-disable-line
 
-// Generate Customer Activity Data
-for(i=0; i<myStores.length; i++) {
-  myStores[i].custActivity(myStores[i].custMin, myStores[i].custMax);
-}
-
-// Generate sales data foreach location
-for(i=0; i<myStores.length; i++) {
-  // console.log('Generating data for: ' + myStores[i].location);
+// Generate Customer Activity Data foreach location
+for(let i=0; i<myStores.length; i++) {
   myStores[i].custActivity(myStores[i].custMin, myStores[i].custMax);
 }
 
 // Output sales data to 'sales.html' foreach location
-for(i=0; i<myStores.length; i++) {
+for(let i=0; i<myStores.length; i++) {
   console.log('Rendering table for: ' + myStores[i].location);
   myStores[i].renderHeader();
   myStores[i].renderRow();

@@ -179,9 +179,11 @@ div.column4 ul li:last-child {font-weight: 700;}
 div.column5 ul li:last-child {font-weight: 700;}
 
 /* Tables */
-table.analytics {
-    margin: 50px;
+table {
+    /* margin: 50px; */
     border: 1px solid #ddd;
+    margin: 0 auto;
+    /* outline: 4px solid green; */
 }
 tr.analytics {
     margin: 50px;
