@@ -22,7 +22,7 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
 
   // Generated Values
   this.salesPerHour = salesPH; // cookies per hour
-  this.dailyTotal = dailyT;    // total cookies sold per day
+  this.dailyTotal = dailyT; // total cookies sold per day
 
   // Store a reference to every new instance in global 'myStores' array
   myStores.push(this);
