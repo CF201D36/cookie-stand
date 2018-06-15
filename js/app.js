@@ -8,10 +8,9 @@
 // var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 var myHours  = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
 var myStores = [];
-var myTable  = document.getElementById('mySales');
 
 // ------------------------------------------------------------------------------------------------------------
-// CONSTRUCTOR OBJECTS
+// OBJECTS
 // ------------------------------------------------------------------------------------------------------------
 // Store Object
 function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
@@ -29,12 +28,12 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
 }
 
 // ------------------------------------------------------------------------------------------------------------
-// CONSTRUCTOR METHODS
+// METHODS
 // ------------------------------------------------------------------------------------------------------------
-// Generate customer activity data using a random number generator
-Store.prototype.custActivity = function (cMin, cMax) {
+Store.prototype.cookieSales = function (cMin, cMax) {
   // Cycle through each hour
   for(var i=0; i < myHours.length; i++) {
+
     // Generate a random customer traffic total for each hour
     var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
 
@@ -47,42 +46,51 @@ Store.prototype.custActivity = function (cMin, cMax) {
   }
 };
 
-// Render Table Header Row
-Store.renderHeader = function () {
-  var hrEl = document.createElement('tr');
+//-----------------------------------------------------------------
+Store.prototype.renderRow = function () {
+  // Fetch table elements
+  var tBody = document.getElementById('table-sales-body');
 
-  //Add blank cell to first TD element in Header
-  // hrEl.appendChild(thEl);
+  // Create table body elements
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+
+  // Append Data to Cells
+  for (var i=0; i < myHours.length; i++) {
+    tdEl.textContent = this.salesPerHour;
+    trEl.appendChild(tdEl);
+  }
+  tBody.appendChild(trEl);
+};
+
+//-----------------------------------------------------------------
+Store.renderHeader = function () {
+  // Fetch table elements
+  var tHead  = document.getElementById('table-sales-header');
+
+  // Create table row element
+  var hrEl = document.createElement('tr');
 
   // Add hours to Header
   for(var i=0; i < myHours.length; i++) {
     var thEl = document.createElement('th');
     thEl.textContent = myHours[i];
     hrEl.appendChild(thEl);
+    tHead.appendChild(thEl);
   }
-
-  // Append Header to Table
-  myTable.appendChild(hrEl);
 };
 
-// Render Table Data Rows
-Store.prototype.renderRow = function () {
-  // Create Elements
-  var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
+//-----------------------------------------------------------------
+Store.buildTable = function () {
+  // Initiate Header
+  Store.renderHeader();
 
-  // Append Data to Cells
-  tdEl.textContent = this.location;
-  trEl.appendChild(tdEl);
-  tdEl.textContent = this.custMin;
-  trEl.appendChild(tdEl);
-  tdEl.textContent = this.custMax;
-  trEl.appendChild(tdEl);
-  tdEl.textContent = this.avgSalePerCust;
-  trEl.appendChild(tdEl);
-
-  // Append Row to Table
-  myTable.appendChild(trEl);
+  // Initiate Body
+  for(var i=0; i < myStores.length; i++) {
+    console.log('Rendering table for: ' + myStores[i].location);
+    myStores[i].cookieSales(myStores[i].custMin,myStores[i].custMax);
+    myStores[i].renderRow();
+  }
 };
 
 // ------------------------------------------------------------------------------------------------------------
@@ -95,32 +103,15 @@ new Store('Seattle Center', 11, 38, 3.7, [], 0); // eslint-disable-line
 new Store('Capitol Hill',   20, 38, 2.3, [], 0); // eslint-disable-line
 new Store('Alki',           2,  16, 4.6, [], 0); // eslint-disable-line
 
-// Generate Customer Activity Data foreach location
-Store.prototype.generateRandom = function () {
-  for(var i=0; i<myStores.length; i++) {
-    myStores[i].custActivity(myStores[i].custMin, myStores[i].custMax);
-  }
-};
-
-// Output sales data to 'sales.html' foreach location
-Store.loadTable = function () {
-  Store.renderHeader();
-
-  for(var i=0; i<myStores.length; i++) {
-    console.log('Rendering table for: ' + myStores[i].location);
-    myStores[i].renderRow();
-  }
-};
-
-Store.loadTable();
+// Render Table
+Store.buildTable();
 
 // ------------------------------------------------------------------------------------------------------------
 // FUNCTIONS
 // ------------------------------------------------------------------------------------------------------------
 
-
 // ------------------------------------------------------------------------------------------------------------
-// UNUSED CODE
+// DEPRECATED
 // ------------------------------------------------------------------------------------------------------------
 // function generateList () {
 //   // Output destination

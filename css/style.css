@@ -129,8 +129,9 @@ table {
     border: 1px solid #ddd;
     /* outline: 4px solid green; */
 }
-tr.analytics {
-    margin: 50px;
+thead {
+    font-size: 16px;
+    border: 1px solid #ddd;
 }
 
 /* Products */
