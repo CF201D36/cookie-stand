@@ -212,6 +212,43 @@ div.section {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   }
 
+/* Form Styling */
+form {
+    margin: 25px auto;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(111, 193, 213, 0.8),
+        rgba(40, 147, 180, 0.8));
+}
+form fieldset {
+    margin: 25px;
+}
+form legend {
+    font-weight: bold;
+    font-size: 22px;
+}
+form label[for="storeCustMax"], form label[for="storeAvgSalePerCust"] {
+    margin-left: 80px;
+}
+form input[name="storeLocation"] {
+    width: 774px;
+    margin-left: 25px;
+    font-weight: bold;
+}
+form input[name="storeCustMin"], form input[name="storeCustMax"], form input[name="storeAvgSalePerCust"] {
+    width: 100px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+form button {
+    border: none;
+    margin-top: 25px;
+    padding: 10px 70px;
+    font-weight: 
+}
+
 /* Footer */
 footer.home {
     clear: both;
@@ -232,6 +269,7 @@ footer.sales {
     margin-top: 50px;
 }
 footer p {
+    height: 50px;
     color: white;
 }
 .footer {
