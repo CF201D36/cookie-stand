@@ -1,3 +1,11 @@
+/*
+Theme Name: Salmon Cookies
+Description: A CSS stylesheet created for the Code Fellows 201d36 Salmon Cookies project
+Author: Ben Harris
+Author URI: http://www.harrishills.com
+Tags: Code Fellows, Practice, Lab, Website
+*/
+
 /* Default Styles */
 * {
     margin: 0;
@@ -20,18 +28,16 @@ main.sales {
     width: 960px;
     margin: 0 auto;
 }
-p {
-    padding-top: 25px;    
-}
+p {padding-top: 25px;}
 b {font-weight: 700;}
 i {font-style: italic;}
 i {font-style: underline;}
 
 /* Links */
-a:link    {color: white; text-decoration: none;}
+a:link    {color: #fff; text-decoration: none;}
 a:hover   {color: rgb(255, 255, 255); text-decoration: none; text-shadow: 1px 1px rgb(231, 81, 156); }
 a:active  {color: rgb(231, 81, 156);}
-a:visited {color: white;}
+a:visited {color: #fff;}
 
 /* Header Styles */
 header.home {
@@ -66,7 +72,7 @@ div.logo {
     position: absolute;
     top: 30px;
     left: 40px;
-    color: white;
+    color: #fff;
     font-size: 20px;
     font-weight: 700;
 }
@@ -87,7 +93,7 @@ div.textbox-home {
 
 /* Hero Styles */
 .hero {
-    color: white;
+    color: #fff;
     text-transform: uppercase;
 }
 .hero-main {
@@ -114,24 +120,13 @@ ul.nav {
     position: absolute;
     top: 30px;
     right: 40px;
-    color: white;
+    color: #fff;
     font-size: 20px;
     font-weight: 700;
 }
 .nav > li{
     display: inline;
     padding: 10px;
-}
-
-/* Tables */
-table {
-    margin-top: 50px;
-    border: 1px solid #ddd;
-    /* outline: 4px solid green; */
-}
-thead {
-    font-size: 16px;
-    border: 1px solid #ddd;
 }
 
 /* Products */
@@ -181,36 +176,53 @@ div.section {
     padding: 25px;
     border: 1px solid #ddd;
     /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); */
-  }
-  div.section > img {
-    float: left;
-    margin-right: 25px;
-    width: 500px;
-  }
-  div.scroll {
-    height: 235px;
-    overflow: auto;
-    margin-bottom: 17px;
-  }
-  div.section h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  div.section p {
-    padding-bottom: 15px;
-  }
-  div.section button {
-    border: none;
-    background: rgba(40, 147, 180, 0.8);
-    padding: 8px 30px;
-    color: #FFF;
-    font-weight: 700;
-  }
-  div.section button:hover {
-    background: rgba(31, 190, 230, 0.8);
-    transition: 250ms;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  }
+}
+div.section > img {
+float: left;
+margin-right: 25px;
+width: 500px;
+}
+div.scroll {
+height: 235px;
+overflow: auto;
+margin-bottom: 17px;
+}
+div.section h2 {
+font-size: 24px;
+margin-bottom: 15px;
+}
+div.section p {
+padding-bottom: 15px;
+}
+div.section button {
+border: none;
+background: rgba(40, 147, 180, 0.8);
+padding: 8px 30px;
+color: #fff;
+font-weight: 700;
+}
+div.section button:hover {
+background: rgba(31, 190, 230, 0.8);
+transition: 250ms;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Tables */
+table {
+    margin-top: 50px;
+    border: 1px solid #ddd;
+}
+table td, table tr {
+    width: 50px;
+    height: 50px;
+}
+thead {
+    font-size: 12px;
+    border: 1px solid #ddd;
+}
+tbody {
+    font-size: 12px;
+}
 
 /* Form Styling */
 form {
@@ -246,7 +258,10 @@ form button {
     border: none;
     margin-top: 25px;
     padding: 10px 70px;
-    font-weight: 
+    background: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 /* Footer */
@@ -270,7 +285,7 @@ footer.sales {
 }
 footer p {
     height: 50px;
-    color: white;
+    color: #fff;
 }
 .footer {
     width: 960px;
