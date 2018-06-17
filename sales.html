@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Salmon Cookies&trade; | Sales</title>
 </head>
-<body>
+<body id="sales-page">
     <header class="sales">
         <div class="logo">Seattle Cookie Dude&reg;</div>
         <div class="textbox-sales">
@@ -38,19 +38,19 @@
         </table>
         <form id="form-add-object">
             <fieldset>
-                <legend>Add New Store Data</legend>
+                <legend>Add New Store</legend>
                 
                 <label for="storeLocation">Store Location</label>
                 <input name="storeLocation" type="text">
                 <br>
                 <label for="storeCustMin">Customers (Min)</label>
-                <input name="storeCustMin" type="text">
+                <input name="storeCustMin" type="number" min="0">
         
                 <label for="storeCustMax">Customers (Max)</label>
-                <input name="storeCustMax" type="text">
+                <input name="storeCustMax" type="number" min="0">
                 
                 <label for="storeAvgSalePerCust">Avg. Sale per Customer</label>
-                <input name="storeAvgSalePerCust" type="text">
+                <input name="storeAvgSalePerCust" type="number" step="0.1" min="0">
                 <br>
                 <button event="submit">Add</button>
             </fieldset>

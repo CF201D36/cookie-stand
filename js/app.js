@@ -5,10 +5,12 @@
 'use strict';
 
 // Global Variables
-// var myDays  = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
-var myHours  = ['6:00 am','7:00 am','8:00 am','9:00 am','10:00 am','11:00 am','12:00 pm','1:00 pm','2:00 pm','3:00 pm','4:00 pm','5:00 pm','6:00 pm','7:00 pm','8:00 pm'];
-var myStores = [];
-var formAddObject = document.getElementById('form-add-object');
+var myGlobals = {
+  storeHours: ['6 am','7 am','8 am','9 am','10 am','11 am','12 pm','1 pm','2 pm','3 pm','4 pm','5 pm','6 pm','7 pm','8 pm'],
+  allStores: [],
+};
+
+// var formAddObject = document.getElementById('form-add-object');
 
 // ------------------------------------------------------------------------------------------------------------
 // OBJECTS
@@ -24,8 +26,8 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
   this.salesPerHour = salesPH; // cookies per hour
   this.dailyTotal = dailyT; // total cookies sold per day
 
-  // Store a reference to each new instance in a global 'myStores' array
-  myStores.push(this);
+  // Store a reference to each new instance in a global 'allStores' array
+  myGlobals.allStores.push(this);
 }
 
 // ------------------------------------------------------------------------------------------------------------
@@ -33,7 +35,7 @@ function Store(myLoc, myMin, myMax, myAvg, salesPH, dailyT) {
 // ------------------------------------------------------------------------------------------------------------
 Store.prototype.cookieSales = function (cMin, cMax) {
   // Cycle through each hour
-  for(var i=0; i < myHours.length; i++) {
+  for(var i=0; i < myGlobals.storeHours.length; i++) {
 
     // Generate a random customer traffic total for each hour
     var randNum = Math.round(Math.random() * (cMax - cMin) + cMin);
@@ -49,18 +51,20 @@ Store.prototype.cookieSales = function (cMin, cMax) {
 
 //-----------------------------------------------------------------
 Store.buildTable = function () {
-  // Generate Table Header
-  Store.renderTableHeader();
+  if(document.getElementById('sales-page')) {
+    // Generate Table Header
+    Store.renderTableHeader();
 
-  // Generate Table Body
-  for(var i=0; i < myStores.length; i++) {
-    console.log('Rendering table for: ' + myStores[i].location);
-    myStores[i].cookieSales(myStores[i].custMin,myStores[i].custMax);
-    myStores[i].renderTableBody();
+    // Generate Table Body
+    for(var i=0; i < myGlobals.allStores.length; i++) {
+      console.log('Rendering table for: ' + myGlobals.allStores[i].location);
+      myGlobals.allStores[i].cookieSales(myGlobals.allStores[i].custMin,myGlobals.allStores[i].custMax);
+      myGlobals.allStores[i].renderTableBody();
+    }
+
+    // Generate Table Footer
+    Store.renderTableFooter();
   }
-
-  // Generate Table Footer
-  Store.renderTableFooter();
 };
 
 //-----------------------------------------------------------------
@@ -78,9 +82,9 @@ Store.renderTableHeader = function () {
   hrEl.appendChild(tdBlank);
 
   // Create header data (hours)
-  for(var i=0; i < myHours.length; i++) {
+  for(var i=0; i < myGlobals.storeHours.length; i++) {
     var thEl = document.createElement('th');
-    thEl.textContent = myHours[i];
+    thEl.textContent = myGlobals.storeHours[i];
     hrEl.appendChild(thEl);
   }
 
@@ -105,7 +109,7 @@ Store.prototype.renderTableBody = function () {
   trEl.appendChild(tdLoc);
 
   // Create table data (hours)
-  for (var i=0; i < myHours.length; i++) {
+  for (var i=0; i < myGlobals.storeHours.length; i++) {
     var tdHours = document.createElement('td');
     tdHours.textContent = this.salesPerHour[i];
     trEl.appendChild(tdHours);
@@ -132,10 +136,10 @@ Store.renderTableFooter = function () {
   trEl.appendChild(tdLoc);
 
   // Create table data (daily total)
-  for (var h=0; h < myHours.length; h++) {
+  for (var h=0; h < myGlobals.storeHours.length; h++) {
     var hourlyTotal = 0;
-    for (var i=0; i < myStores.length; i++) {
-      hourlyTotal += myStores[i].salesPerHour[h];
+    for (var i=0; i < myGlobals.allStores.length; i++) {
+      hourlyTotal += myGlobals.allStores[i].salesPerHour[h];
     }
     var tdDaily = document.createElement('td');
     tdDaily.textContent = hourlyTotal;
@@ -144,24 +148,36 @@ Store.renderTableFooter = function () {
 
   // Create table data (grand total)
   var grandTotal = 0;
-  for (var i=0; i < myStores.length; i++) {
-    grandTotal += myStores[i].dailyTotal;
+  for (var t=0; t < myGlobals.allStores.length; t++) {
+    grandTotal += myGlobals.allStores[t].dailyTotal;
   }
-  var tdTotal = document.createElement('td')
+  var tdTotal = document.createElement('td');
   tdTotal.textContent = grandTotal;
   trEl.appendChild(tdTotal);
 };
 
 //-----------------------------------------------------------------
-Store.addNewStore = function(event) { // event is a parameter that actually specifies the item being passed -- but it's just a variable.
+Store.addStore = function(event) { // event is a parameter that actually specifies the item being passed -- but it's just a variable.
+  // Capture form data
   event.preventDefault(); // do not refresh page
-  var newStoreLocation  = event.target.storeLocation.value;
+  var newLocation       = event.target.storeLocation.value;
   var newCustMin        = event.target.storeCustMin.value;
   var newCustMax        = event.target.storeCustMax.value;
   var newAvgSalePerCust = event.target.storeAvgSalePerCust.value;
 
-  new Store(newStoreLocation,newCustMin,newCustMax, newAvgSalePerCust);
-  Store.innerHTML = ' '; // clears the table previously rendered, allowing you to re-render the table in your render function.
+  // Add new location to 'Stores' object
+  new Store(newLocation,newCustMin,newCustMax, newAvgSalePerCust, [], 0);
+
+  // Remove old table data from DOM
+  var clearTableHeader = document.getElementById('table-sales-header');
+  var clearTableBody   = document.getElementById('table-sales-body');
+  var clearTableFooter = document.getElementById('table-sales-footer');
+  clearTableHeader.textContent = '';
+  clearTableBody.textContent = '';
+  clearTableFooter.textContent = '';
+
+  // Rebuild Table with new data
+  Store.buildTable();
 };
 
 // ------------------------------------------------------------------------------------------------------------
@@ -174,11 +190,12 @@ new Store('Seattle Center', 11, 38, 3.7, [], 0); // eslint-disable-line
 new Store('Capitol Hill',   20, 38, 2.3, [], 0); // eslint-disable-line
 new Store('Alki',           2,  16, 4.6, [], 0); // eslint-disable-line
 
-// Render Table
+// Draw initial table
 Store.buildTable();
 
-// Bind event listener to form
-// Store.Form.addEventListener('submit', Store.addNewStore);
+// Bind event listener to 'Add New Store' form
+var formNewStore = document.getElementById('form-add-object');
+formNewStore.addEventListener('submit', Store.addStore);
 
 // ------------------------------------------------------------------------------------------------------------
 // FUNCTIONS
